@@ -1,0 +1,10 @@
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span>© {{ site.time | date: '%Y' }} {{ site.title | default: "Portfolio" }}</span>
+    <div class="footer-links">
+      <a href="{{ '/about' | relative_url }}">About</a>
+      <a href="{{ '/blog' | relative_url }}">Blog</a>
+      <a href="mailto:{{ site.email | default: 'hello@example.com' }}">Contact</a>
+    </div>
+  </div>
+</footer>
