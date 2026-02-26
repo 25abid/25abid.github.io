@@ -20,5 +20,81 @@
 
       {% include footer.html %}
     </div>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        var firstEl = document.querySelector('.name-first');
+        var lastEl = document.querySelector('.name-last');
+        if (!firstEl || !lastEl) return;
+
+        var first = 'Abdul Qader';
+        var base = 'Abdul';
+        var suffix = 'kader';
+        var lastName = 'Alturkmani';
+
+        var typeSpeed = 150; // slower typing
+        var deleteSpeed = 190; // slightly slower deleting
+        var holdDelay = 1400;
+
+        var stage = 'typingFirst';
+        var index = 0;
+        var suffixIndex = 0;
+        var lastIndex = 0;
+
+        function setCaret(target) {
+          firstEl.classList.toggle('has-caret', target === 'first');
+          lastEl.classList.toggle('has-caret', target === 'last');
+        }
+
+        function tick() {
+          if (stage === 'typingFirst') {
+            setCaret('first');
+            if (index < first.length) {
+              index++;
+              firstEl.textContent = first.slice(0, index);
+              setTimeout(tick, typeSpeed);
+            } else {
+              stage = 'deletingToAbdul';
+              setTimeout(tick, holdDelay);
+            }
+          } else if (stage === 'deletingToAbdul') {
+            setCaret('first');
+            var current = firstEl.textContent;
+            if (current.length > base.length) {
+              firstEl.textContent = current.slice(0, current.length - 1);
+              setTimeout(tick, deleteSpeed);
+            } else {
+              stage = 'typingKader';
+              suffixIndex = 0;
+              setTimeout(tick, typeSpeed);
+            }
+          } else if (stage === 'typingKader') {
+            setCaret('first');
+            if (suffixIndex < suffix.length) {
+              suffixIndex++;
+              firstEl.textContent = base + suffix.slice(0, suffixIndex);
+              setTimeout(tick, typeSpeed);
+            } else {
+              stage = 'typingLast';
+              lastIndex = 0;
+              setTimeout(tick, holdDelay);
+            }
+          } else if (stage === 'typingLast') {
+            setCaret('last');
+            if (lastIndex <= lastName.length) {
+              lastEl.textContent = lastName.slice(0, lastIndex);
+              lastIndex++;
+              setTimeout(tick, typeSpeed);
+            } else {
+              stage = 'done'; // "Abdulkader" on first line, "Alturkmani" on second
+            }
+          }
+        }
+
+        firstEl.textContent = '';
+        lastEl.textContent = '';
+        setCaret('first');
+        setTimeout(tick, holdDelay);
+      });
+    </script>
   </body>
 </html>

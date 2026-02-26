@@ -3,13 +3,20 @@ layout: default
 title: Home
 ---
 
-<section class="hero">
-  <p class="eyebrow">{{ site.title | default: "Portfolio" }}</p>
-  <h1 class="hero-title">Hi, I’m {{ site.author | default: "Your Name" }}. I build <span>clean</span> web experiences.</h1>
-  <p>
-    I’m a developer and designer focused on minimalist interfaces, fast frontends, and thoughtful user experience.
-    This is my space for selected work, writing, and experiments.
-  </p>
+<section class="hero hero--name">
+  <div class="name-story">
+    <div class="name-story-row">
+      <span class="name-story-anim">
+        <span class="name-story-legal">
+          <span class="name-morph" aria-label="Legal name animation">
+            <span class="name-first"></span>
+            <br />
+            <span class="name-last"></span>
+          </span>
+        </span>
+      </span>
+    </div>
+  </div>
 </section>
 
 <section class="section">
