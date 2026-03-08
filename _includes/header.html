@@ -1,10 +1,13 @@
-<header class="site-header">
-  <nav class="nav" aria-label="Primary">
-    <div class="nav-links nav-links--centered">
-      <a href="{{ '/' | relative_url }}">Home</a>
-      <a href="{{ '/about' | relative_url }}">About</a>
-      <a href="{{ '/blog' | relative_url }}">Blog</a>
-      <a href="{{ '/work' | relative_url }}">Work</a>
+<header class="site-header" role="banner">
+  <h1 class="site-name">
+    <a href="{{ '/' | relative_url }}">{{ site.author }}</a>
+  </h1>
+  <nav class="nav nav--floating" aria-label="Primary">
+    <div class="nav-pill">
+      <a href="{{ '/' | relative_url }}" class="nav-link {% if page.url == '/' or page.url == '' %}nav-link--active{% endif %}">Home</a>
+      <a href="{{ '/work' | relative_url }}" class="nav-link {% if page.url contains 'work' %}nav-link--active{% endif %}">Work</a>
+      <a href="{{ '/blog' | relative_url }}" class="nav-link {% if page.url contains 'blog' %}nav-link--active{% endif %}">Blog</a>
+      <a href="{{ '/about' | relative_url }}" class="nav-link {% if page.url contains 'about' %}nav-link--active{% endif %}">About</a>
     </div>
   </nav>
 </header>

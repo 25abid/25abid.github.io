@@ -3,31 +3,50 @@ layout: default
 title: Home
 ---
 
-<section class="hero hero--name">
-  <div class="name-story">
-    <div class="name-story-row">
-      <span class="name-story-anim">
-        <span class="name-story-legal">
-          <span class="name-morph" aria-label="Legal name animation">
-            <span class="name-first"></span>
-            <br />
-            <span class="name-last"></span>
-          </span>
-        </span>
-      </span>
-    </div>
-  </div>
-</section>
+<div class="home">
+  <section class="home-section">
+    <h2 class="home-label">Latest Writing</h2>
+    <ul class="home-list">
+      {% for post in site.posts limit:3 %}
+        <li class="home-item">
+          <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+          <span class="home-meta">{{ post.date | date: "%b %Y" }}</span>
+          <p class="home-desc">{{ post.excerpt | strip_html | truncate: 100 }}</p>
+        </li>
+      {% endfor %}
+    </ul>
+    <p class="home-link"><a href="{{ '/blog' | relative_url }}">View all posts</a></p>
+  </section>
 
-<section class="section">
-  <h2>Latest Writing</h2>
-  <div class="card-grid">
-    {% for post in site.posts limit:3 %}
-      <article class="card">
-        <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
-        <p>{{ post.excerpt | strip_html | truncate: 140 }}</p>
-      </article>
-    {% endfor %}
-  </div>
-  <p style="margin-top: 1rem;"><a href="{{ '/blog' | relative_url }}">View all posts →</a></p>
-</section>
+  <section class="home-section">
+    <h2 class="home-label">Latest Project</h2>
+    {% assign proj = site.data.projects.featured %}
+    <div class="home-item">
+      <a href="{{ proj.url | relative_url }}">{{ proj.title }}</a>
+      <span class="home-meta">{{ proj.year }}</span>
+      <p class="home-desc">{{ proj.description }}</p>
+    </div>
+    <p class="home-link"><a href="{{ '/work' | relative_url }}">View all projects</a></p>
+  </section>
+
+  <section class="home-section">
+    <h2 class="home-label">GitHub</h2>
+    <div id="github-stats" class="home-api">
+      <span class="home-api-loading">Loading…</span>
+    </div>
+  </section>
+</div>
+
+<script>
+(function() {
+  var el = document.getElementById('github-stats');
+  if (!el) return;
+  fetch('https://api.github.com/users/{{ site.github_username }}')
+    .then(function(r) { return r.json(); })
+    .then(function(d) {
+      if (d.message) { el.textContent = '—'; return; }
+      el.innerHTML = '<a href="' + d.html_url + '" target="_blank" rel="noopener">' + d.public_repos + ' repos</a> · ' + d.followers + ' followers';
+    })
+    .catch(function() { el.textContent = '—'; });
+})();
+</script>
