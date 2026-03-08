@@ -4,35 +4,63 @@ title: Home
 ---
 
 <div class="home">
-  <section class="home-section">
-    <h2 class="home-label">Latest Writing</h2>
-    <ul class="home-list">
-      {% for post in site.posts limit:3 %}
-        <li class="home-item">
-          <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-          <span class="home-meta">{{ post.date | date: "%b %Y" }}</span>
-          <p class="home-desc">{{ post.excerpt | strip_html | truncate: 100 }}</p>
-        </li>
-      {% endfor %}
-    </ul>
-    <p class="home-link"><a href="{{ '/blog' | relative_url }}">View all posts</a></p>
-  </section>
-
-  <section class="home-section">
-    <h2 class="home-label">Latest Project</h2>
-    {% assign proj = site.data.projects.featured %}
-    <div class="home-item">
-      <a href="{{ proj.url | relative_url }}">{{ proj.title }}</a>
-      <span class="home-meta">{{ proj.year }}</span>
-      <p class="home-desc">{{ proj.description }}</p>
+  <section class="home-hero">
+    <div class="home-hero-text">
+      <p class="home-kicker">Home</p>
+      <h1 class="home-hero-title">
+        Currently turning<br />
+        <span>coffee into code.</span>
+      </h1>
+      <p class="home-hero-sub">
+        I’m Abdulkader, a University of Toronto student exploring software, data, and the systems behind everyday things.
+      </p>
     </div>
-    <p class="home-link"><a href="{{ '/work' | relative_url }}">View all projects</a></p>
+
+    <div class="home-hero-graphic" aria-hidden="true">
+      <div class="home-hero-blob"></div>
+      <div class="home-hero-ring home-hero-ring--outer"></div>
+      <div class="home-hero-ring home-hero-ring--middle"></div>
+      <div class="home-hero-ring home-hero-ring--inner"></div>
+      <div class="home-hero-node home-hero-node--one"></div>
+      <div class="home-hero-node home-hero-node--two"></div>
+      <div class="home-hero-node home-hero-node--three"></div>
+    </div>
   </section>
 
-  <section class="home-section">
-    <h2 class="home-label">GitHub</h2>
-    <div id="github-stats" class="home-api">
-      <span class="home-api-loading">Loading…</span>
+  <section class="home-columns">
+    <div class="home-column">
+      <h2 class="home-label">Latest writing</h2>
+      <ul class="home-list">
+        {% for post in site.posts limit:2 %}
+          <li class="home-item">
+            <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+            <span class="home-meta">{{ post.date | date: "%b %Y" }}</span>
+            <p class="home-desc">{{ post.excerpt | strip_html | truncate: 110 }}</p>
+          </li>
+        {% endfor %}
+      </ul>
+      <p class="home-link"><a href="{{ '/blog' | relative_url }}">View all posts</a></p>
+    </div>
+
+    <div class="home-column">
+      <h2 class="home-label">Latest project</h2>
+      {% assign proj = site.data.projects.featured %}
+      <div class="home-item home-item--project">
+        <a href="{{ proj.url | relative_url }}">{{ proj.title }}</a>
+        <span class="home-meta">{{ proj.year }}</span>
+        <p class="home-desc">{{ proj.description }}</p>
+      </div>
+      <p class="home-link"><a href="{{ '/work' | relative_url }}">View all projects</a></p>
+    </div>
+
+    <div class="home-column">
+      <h2 class="home-label">GitHub</h2>
+      <div id="github-stats" class="home-api">
+        <span class="home-api-loading">Loading…</span>
+      </div>
+      <p class="home-desc home-desc--small">
+        Pulled live from GitHub’s API. Just enough data to show what I’ve been shipping.
+      </p>
     </div>
   </section>
 </div>
@@ -45,8 +73,17 @@ title: Home
     .then(function(r) { return r.json(); })
     .then(function(d) {
       if (d.message) { el.textContent = '—'; return; }
-      el.innerHTML = '<a href="' + d.html_url + '" target="_blank" rel="noopener">' + d.public_repos + ' repos</a> · ' + d.followers + ' followers';
+      el.innerHTML =
+        '<a href=\"' +
+        d.html_url +
+        '\" target=\"_blank\" rel=\"noopener\">' +
+        d.public_repos +
+        ' repos</a> · ' +
+        d.followers +
+        ' followers';
     })
-    .catch(function() { el.textContent = '—'; });
+    .catch(function() {
+      el.textContent = '—';
+    });
 })();
 </script>
