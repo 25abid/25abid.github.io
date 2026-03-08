@@ -29,6 +29,8 @@ baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://qader.ca" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: 25abid
 github_username:  25abid
+linkedin_url: "https://www.linkedin.com/in/abdulkader-alturkmani-0258b121b"
+instagram_url: "https://www.instagram.com/25abid/"
 
 # Build settings
 theme: minima

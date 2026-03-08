@@ -43,7 +43,7 @@ a:hover {
   flex-direction: column;
 }
 
-/* Floating nav: fixed position, solid background (no blur), same compact look on all devices */
+/* Floating nav: fixed position with frosted blur */
 .site-header {
   position: fixed;
   top: 0;
@@ -53,13 +53,43 @@ a:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0.35rem 1rem 0.2rem;
+  padding: 0.35rem 1rem 1.1rem;
   pointer-events: none;
+}
+
+.site-header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(245, 239, 228, 0.92) 0%,
+    rgba(245, 239, 228, 0.55) 55%,
+    rgba(245, 239, 228, 0) 100%
+  );
+  backdrop-filter: blur(20px) saturate(1.15);
+  -webkit-backdrop-filter: blur(20px) saturate(1.15);
+  mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 0.7) 50%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 0.7) 75%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  pointer-events: none;
+  z-index: 0;
 }
 
 .site-name,
 .site-header .nav {
   pointer-events: auto;
+  position: relative;
+  z-index: 1;
 }
 
 .site-name {
@@ -93,10 +123,12 @@ a:hover {
   gap: 0;
   width: min(320px, calc(100vw - 2rem));
   padding: 0.35rem;
-  background: var(--bg-elev);
+  background: rgba(255, 255, 255, 0.72);
   border: 1px solid var(--border);
   border-radius: 9999px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .nav-link {
@@ -137,7 +169,7 @@ a:hover {
 .main {
   max-width: 640px;
   margin: 0 auto;
-  padding: 4.5rem 1.5rem 3rem;
+  padding: 4.5rem 1.5rem 7rem;
   width: 100%;
   opacity: 0;
   transform: translateY(6px);
@@ -160,6 +192,7 @@ a:hover {
 }
 
 .hero-title {
+  font-family: var(--serif);
   font-size: clamp(1.75rem, 3.5vw, 2.5rem);
   line-height: 1.2;
   margin: 0;
@@ -186,6 +219,27 @@ a:hover {
   letter-spacing: 0.2em;
   color: var(--muted);
   margin: 0 0 1rem 0;
+}
+
+.about-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.75rem;
+  color: var(--muted);
+}
+
+.about-list li {
+  position: relative;
+  padding-left: 1rem;
+}
+
+.about-list li::before {
+  content: "-";
+  position: absolute;
+  left: 0;
+  color: var(--accent);
 }
 
 .card-grid {
@@ -261,7 +315,8 @@ a:hover {
 
 .home-hero-graphic {
   position: relative;
-  width: min(260px, 52vw);
+  width: min(200px, 42vw);
+  max-width: 100%;
   aspect-ratio: 1;
   border-radius: 40% 60% 55% 45%;
   overflow: hidden;
@@ -322,8 +377,8 @@ a:hover {
 
 .home-columns {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 2.5rem;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 2rem;
   align-items: flex-start;
 }
 
@@ -431,15 +486,49 @@ body.is-transitioning .main {
 }
 
 .site-footer {
-  margin-top: auto;
-  border-top: 1px solid var(--border);
-  background: var(--bg-elev);
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9;
+  border-top: none;
+  background: transparent;
+  padding: 1.8rem 1.5rem 1.2rem;
+  pointer-events: none;
+}
+
+.site-footer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(245, 239, 228, 0.92) 0%,
+    rgba(245, 239, 228, 0.55) 55%,
+    rgba(245, 239, 228, 0) 100%
+  );
+  backdrop-filter: blur(20px) saturate(1.15);
+  -webkit-backdrop-filter: blur(20px) saturate(1.15);
+  mask-image: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 0.7) 50%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 0.7) 75%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  pointer-events: none;
 }
 
 .footer-inner {
-  max-width: 1100px;
+  max-width: 720px;
+  width: min(720px, calc(100% - 2rem));
   margin: 0 auto;
-  padding: 1.5rem;
+  padding: 0.9rem 1.2rem;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -447,15 +536,46 @@ body.is-transitioning .main {
   gap: 1rem;
   color: var(--muted);
   font-size: 0.9rem;
+  position: relative;
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(214, 207, 194, 0.75);
+  border-radius: 999px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  pointer-events: auto;
 }
 
 .footer-links {
   display: flex;
-  gap: 1rem;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+}
+
+.footer-links a {
+  color: var(--muted);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.footer-links a:hover {
+  color: var(--text);
+  text-decoration: none;
 }
 
 @media (max-width: 720px) {
   .home {
     gap: 2.5rem;
+  }
+
+  .home-hero {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .home-hero-graphic {
+    width: min(140px, 55vw);
+    justify-self: center;
   }
 }
