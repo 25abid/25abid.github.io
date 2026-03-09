@@ -265,6 +265,60 @@ a:hover {
   line-height: 1.5;
 }
 
+/* About page */
+.about-page {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.about-hero {
+  padding-bottom: 1.2rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.card--about {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.5));
+  border: 1px solid rgba(214, 207, 194, 0.9);
+  border-radius: 14px;
+  padding: 1rem;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07);
+}
+
+.about-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.about-row h3 {
+  margin: 0;
+}
+
+.about-meta {
+  margin: 0;
+  font-size: 0.72rem;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: normal;
+}
+
+.about-subtitle {
+  margin: 0.85rem 0 0.45rem 0;
+  font-size: 0.74rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.about-skills-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
 /* Home layout */
 .home {
   display: flex;
@@ -577,6 +631,16 @@ body.is-transitioning .main {
   .home-hero-graphic {
     width: min(140px, 55vw);
     justify-self: center;
+  }
+
+  .about-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+
+  .about-meta {
+    white-space: normal;
   }
 
   .site-footer {

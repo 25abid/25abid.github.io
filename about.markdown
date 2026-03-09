@@ -4,66 +4,122 @@ title: About
 permalink: /about/
 ---
 
-<section class="hero">
-  <p class="eyebrow">About</p>
-  <h1 class="hero-title">Hey there</h1>
-  <p>
-    I’m Abdulkader, a University of Toronto student focused on software, data, and the systems behind everyday things.
-  </p>
-  <p>
-    Here’s my <a href="{{ '/qader+resume.pdf' | relative_url }}">resume</a>.
-  </p>
-</section>
+<div class="about-page">
+  <section class="hero about-hero">
+    <p class="eyebrow">About</p>
+    <h1 class="hero-title">Software, data, and systems</h1>
+    <p>
+      I am Abdulkader Alturkmani, a University of Toronto student building practical software with strong foundations in data structures, object-oriented design, and interactive UI development.
+    </p>
+    <p>
+      Download my <a href="{{ '/abdulkader-alturkmani-resume.pdf' | relative_url }}">resume</a>!
+    </p>
+  </section>
 
-<section class="section">
-  <h2>Education</h2>
-  <div class="card-grid">
-    <article class="card">
-      <h3>University of Toronto — BSc (Sept 2023–Present)</h3>
-      <p>Geospatial Data Science & Applied Statistics major, Computer Science minor (POST programs). Relevant coursework: Data Analysis, OOP, Git/GitHub, Algorithms.</p>
+  <section class="section">
+    <h2>Education</h2>
+    <article class="card card--about">
+      <div class="about-row">
+        <h3>University of Toronto</h3>
+        <p class="about-meta">Sep 2023 - May 2027</p>
+      </div>
+      <p>Bachelor of Science, Geospatial Data Science Major and Applied Statistics, Computer Science Minor.</p>
+      <p class="about-subtitle">Relevant Coursework</p>
+      <ul class="about-list">
+        <li>Spatial Data Science</li>
+        <li>Introduction to Computer Science</li>
+        <li>Probability and Statistics</li>
+        <li>Multivariable Calculus and Linear Algebra</li>
+        <li>Introduction to Geospatial Information Science</li>
+        <li>Mathematical Proofs</li>
+      </ul>
     </article>
-    <article class="card">
-      <h3>Schulich Business Excellence Academy (July 2022)</h3>
-      <p>Completed the SBEA program at the Schulich School of Business.</p>
-    </article>
-  </div>
-</section>
+  </section>
 
-<section class="section">
-  <h2>Experience</h2>
-  <div class="card-grid">
-    <article class="card">
-      <h3>Drawing Application Development (Team Project) — Oct 2024–Nov 2024</h3>
-      <p>Built a Java drawing app modeled after MS Paint with selection tools, eraser, shapes, brush types, color options, and file save/open/delete features. Collaborated with Git and applied software design principles to ship a functional GUI.</p>
-    </article>
-    <article class="card">
-      <h3>Harvard University, CS50P — Dec 2023–Apr 2024</h3>
-      <p>Created a memory card game in Python as the final project and completed 9 problem sets, ending with university-level object‑oriented programming difficulty.</p>
-    </article>
-    <article class="card">
-      <h3>CO‑OP at Device Repair Shop (Tech N Sell) — Jan 2022–Jun 2022</h3>
-      <p>Repaired electronics (phones, laptops, gaming consoles), tracked expenses and sales in Excel, and coordinated customer pick‑ups and appointments.</p>
-    </article>
-    <article class="card">
-      <h3>Peel Multicultural Council (Volunteer) — Jan 2021–Aug 2021</h3>
-      <p>Facilitated conferences in Google Meets and supported newcomers with resources and local services in Mississauga and Toronto.</p>
-    </article>
-  </div>
-</section>
+  <section class="section">
+    <h2>Projects</h2>
+    <div class="card-grid">
+      <article class="card card--about">
+        <div class="about-row">
+          <h3>Phone Billing and Call Visualization</h3>
+          <p class="about-meta">Python, Pygame</p>
+        </div>
+        <p>Built a Python billing engine to parse call logs, manage contracts, and visualize routes with interactive customer, duration, and location filters.</p>
+      </article>
 
-<section class="section">
-  <h2>Technical skills</h2>
-  <ul class="about-list">
-    <li>Languages: Python, Java, C/C++, C#, HTML/CSS.</li>
-    <li>Tools: Git, GitHub, Visual Studio Code, Linux (Ubuntu), IntelliJ.</li>
-  </ul>
-</section>
+      <article class="card card--about">
+        <div class="about-row">
+          <h3>Treemap Filesystem Visualizer</h3>
+          <p class="about-meta">Python, Data Structures</p>
+        </div>
+        <p>Developed an interactive treemap visualizer with a recursive tree model, rectangle subdivision by subtree size, and click-based expand and collapse behavior.</p>
+      </article>
 
-<section class="section">
-  <h2>Achievements</h2>
-  <ul class="about-list">
-    <li>TELUS Social Impact Bursary (CAD $5000) and UTM Entrance Scholarship (CAD $3000).</li>
-    <li>Ontario Scholar Award.</li>
-    <li>ISNA High School Graduate Academic Honours Award.</li>
-  </ul>
-</section>
+      <article class="card card--about">
+        <div class="about-row">
+          <h3>Java Paint Application with AI Integration</h3>
+          <p class="about-meta">Java, JavaFX, Ollama API</p>
+        </div>
+        <p>Built a Java Paint app with undo and redo, clipboard actions, adjustable styling, and prompt-driven image generation and editing through the Ollama API.</p>
+      </article>
+
+      <article class="card card--about">
+        <div class="about-row">
+          <h3>Othello Game AI</h3>
+          <p class="about-meta">Java, OOP</p>
+        </div>
+        <p>Designed an 8x8 Othello engine with move validation and winner detection, then added greedy and random AI controllers backed by unit tests.</p>
+      </article>
+
+      <article class="card card--about">
+        <div class="about-row">
+          <h3>CS50 Memory Card Game</h3>
+          <p class="about-meta">Python</p>
+        </div>
+        <p>Created the final CS50P project from scratch with card shuffling, matching logic, score tracking, and object-oriented program structure.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Certificates</h2>
+    <div class="card-grid">
+      <article class="card card--about">
+        <div class="about-row">
+          <h3>CS50P - Introduction to Programming with Python</h3>
+          <p class="about-meta">Apr 2024</p>
+        </div>
+        <p>Harvard University (edX). Completed 9 problem sets and developed a full Python final project applying object-oriented design concepts.</p>
+      </article>
+      <article class="card card--about">
+        <div class="about-row">
+          <h3>Schulich Business Excellence Academy (SBEA)</h3>
+          <p class="about-meta">Jul 2022</p>
+        </div>
+        <p>Schulich School of Business. Completed an intensive program in leadership, entrepreneurship, and business fundamentals.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Technical Skills</h2>
+    <div class="about-skills-grid">
+      <article class="card card--about">
+        <p class="about-subtitle">Programming Languages</p>
+        <p>Python, Java, HTML, CSS, JavaScript</p>
+      </article>
+      <article class="card card--about">
+        <p class="about-subtitle">Frameworks and Libraries</p>
+        <p>React, JavaFX, Pygame, Ollama API</p>
+      </article>
+      <article class="card card--about">
+        <p class="about-subtitle">Tools</p>
+        <p>Git, GitHub, VS Code, R Studio, ArcGIS Pro, IntelliJ</p>
+      </article>
+      <article class="card card--about">
+        <p class="about-subtitle">Concepts</p>
+        <p>Object-Oriented Programming, Data Structures, Algorithm Design, Web Development, Responsive Design, Interactive UI Development</p>
+      </article>
+    </div>
+  </section>
+</div>
