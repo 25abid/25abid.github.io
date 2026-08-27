@@ -1,14 +1,50 @@
 :root {
+  --content-width: 640px;
   color-scheme: light;
-  --bg: #f5efe4;
+  --bg: #f3f7fc;
   --bg-elev: #ffffff;
-  --text: #222222;
-  --muted: #6f6a63;
-  --accent: #2f7e79;
-  --border: #d6cfc2;
-  --shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  --bg-hover: #e5edf8;
+  --text: #162033;
+  --muted: #5b687c;
+  --accent: #2563eb;
+  --accent-hover: #1d4ed8;
+  --accent-secondary: #7c3aed;
+  --border: #d5dfed;
+  --code: #9a5b00;
+  --header-wash: rgba(243, 247, 252, 0.92);
+  --header-fade: rgba(243, 247, 252, 0.55);
+  --surface: rgba(255, 255, 255, 0.76);
+  --surface-soft: rgba(255, 255, 255, 0.54);
+  --accent-soft: rgba(37, 99, 235, 0.12);
+  --accent-ring: rgba(37, 99, 235, 0.25);
+  --shadow-color: rgba(20, 43, 76, 0.12);
+  --shadow: 0 10px 30px var(--shadow-color);
   --mono: "JetBrains Mono", "SFMono-Regular", "Menlo", "Monaco", "Consolas", "Liberation Mono", "Courier New", monospace;
   --serif: "Times New Roman", "Times", "Georgia", serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --bg: #0a0e1a;
+    --bg-elev: #111827;
+    --bg-hover: #1a2332;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --accent: #60a5fa;
+    --accent-hover: #93bbfc;
+    --accent-secondary: #8b5cf6;
+    --border: #1e293b;
+    --code: #f59e0b;
+    --header-wash: rgba(10, 14, 26, 0.94);
+    --header-fade: rgba(10, 14, 26, 0.58);
+    --surface: rgba(17, 24, 39, 0.82);
+    --surface-soft: rgba(17, 24, 39, 0.62);
+    --accent-soft: rgba(96, 165, 250, 0.14);
+    --accent-ring: rgba(96, 165, 250, 0.3);
+    --shadow-color: rgba(0, 0, 0, 0.35);
+    --shadow: 0 10px 30px var(--shadow-color);
+  }
 }
 
 * {
@@ -17,6 +53,7 @@
 
 html {
   scroll-behavior: smooth;
+  scrollbar-gutter: stable;
 }
 
 body {
@@ -34,7 +71,15 @@ a {
 }
 
 a:hover {
+  color: var(--accent-hover);
   text-decoration: underline;
+}
+
+code,
+pre,
+kbd,
+samp {
+  color: var(--code);
 }
 
 .page {
@@ -63,9 +108,9 @@ a:hover {
   inset: 0;
   background: linear-gradient(
     to bottom,
-    rgba(245, 239, 228, 0.92) 0%,
-    rgba(245, 239, 228, 0.55) 55%,
-    rgba(245, 239, 228, 0) 100%
+    var(--header-wash) 0%,
+    var(--header-fade) 55%,
+    transparent 100%
   );
   backdrop-filter: blur(20px) saturate(1.15);
   -webkit-backdrop-filter: blur(20px) saturate(1.15);
@@ -123,10 +168,10 @@ a:hover {
   gap: 0;
   width: min(320px, calc(100vw - 2rem));
   padding: 0.35rem;
-  background: rgba(255, 255, 255, 0.72);
+  background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 9999px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 8px 20px var(--shadow-color);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
 }
@@ -151,23 +196,23 @@ a:hover {
 .nav-link:hover {
   color: var(--text);
   text-decoration: none;
-  background: rgba(47, 126, 121, 0.12);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+  background: var(--accent-soft);
+  box-shadow: 0 1px 2px var(--shadow-color);
 }
 
 .nav-link--active {
   color: var(--text);
-  background: var(--border);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  background: var(--bg-hover);
+  box-shadow: 0 1px 3px var(--shadow-color);
 }
 
 .nav-link--active:hover {
   text-decoration: none;
-  background: var(--border);
+  background: var(--bg-hover);
 }
 
 .main {
-  max-width: 640px;
+  max-width: var(--content-width);
   margin: 0 auto;
   padding: 4.5rem 1.5rem 7rem;
   width: 100%;
@@ -277,11 +322,11 @@ a:hover {
 }
 
 .card--about {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.5));
-  border: 1px solid rgba(214, 207, 194, 0.9);
+  background: linear-gradient(180deg, var(--surface), var(--surface-soft));
+  border: 1px solid var(--border);
   border-radius: 14px;
   padding: 1rem;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07);
+  box-shadow: 0 6px 20px var(--shadow-color);
 }
 
 .about-row {
@@ -374,7 +419,7 @@ a:hover {
   aspect-ratio: 1;
   border-radius: 40% 60% 55% 45%;
   overflow: hidden;
-  background: radial-gradient(circle at 20% 15%, #ffffff, #f5efe4 55%, #e3d8c7 100%);
+  background: radial-gradient(circle at 20% 15%, var(--surface), var(--bg-elev) 55%, var(--bg-hover) 100%);
   box-shadow: var(--shadow);
   transform-origin: center;
   animation: home-graphic-float 9s ease-in-out infinite;
@@ -383,16 +428,15 @@ a:hover {
 .home-hero-blob {
   position: absolute;
   inset: 18%;
-  background: radial-gradient(circle at 10% 0%, rgba(47, 126, 121, 0.16), transparent 60%),
-    radial-gradient(circle at 80% 90%, rgba(88, 90, 98, 0.2), transparent 65%);
+  background: radial-gradient(circle at 10% 0%, var(--accent-soft), transparent 60%),
+    radial-gradient(circle at 80% 90%, color-mix(in srgb, var(--accent-secondary) 20%, transparent), transparent 65%);
 }
 
 .home-hero-ring {
   position: absolute;
   inset: 16%;
   border-radius: 999px;
-  border: 1px solid rgba(47, 126, 121, 0.25);
-  mix-blend-mode: multiply;
+  border: 1px solid var(--accent-ring);
 }
 
 .home-hero-ring--middle {
@@ -411,7 +455,7 @@ a:hover {
   height: 8px;
   border-radius: 999px;
   background: var(--accent);
-  box-shadow: 0 0 0 4px rgba(47, 126, 121, 0.18);
+  box-shadow: 0 0 0 4px var(--accent-soft);
 }
 
 .home-hero-node--one {
@@ -557,9 +601,9 @@ body.is-transitioning .main {
   inset: 0;
   background: linear-gradient(
     to top,
-    rgba(245, 239, 228, 0.92) 0%,
-    rgba(245, 239, 228, 0.55) 55%,
-    rgba(245, 239, 228, 0) 100%
+    var(--header-wash) 0%,
+    var(--header-fade) 55%,
+    transparent 100%
   );
   backdrop-filter: blur(20px) saturate(1.15);
   -webkit-backdrop-filter: blur(20px) saturate(1.15);
@@ -591,10 +635,10 @@ body.is-transitioning .main {
   color: var(--muted);
   font-size: 0.9rem;
   position: relative;
-  background: rgba(255, 255, 255, 0.6);
-  border: 1px solid rgba(214, 207, 194, 0.75);
+  background: var(--surface);
+  border: 1px solid var(--border);
   border-radius: 999px;
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 10px 24px var(--shadow-color);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   pointer-events: auto;
