@@ -6,7 +6,6 @@ permalink: /about/
 
 <div class="about-page">
   <section class="hero about-hero">
-    <p class="eyebrow">About</p>
     <h1 class="hero-title">Software, data, and systems</h1>
     <p>
       I am Abdulkader Alturkmani, a University of Toronto student building practical software with strong foundations in data structures, object-oriented design, and interactive UI development.
