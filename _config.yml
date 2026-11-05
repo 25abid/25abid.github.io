@@ -39,6 +39,10 @@ plugins:
 
 exclude:
   - README.md
+  - vendor
+  - node_modules
+  - Gemfile
+  - Gemfile.lock
 
 # Exclude from processing.
 # The following items will not be processed, by default.
