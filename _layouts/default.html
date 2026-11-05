@@ -4,50 +4,25 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#f3f7fc" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="#0a0e1a" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#464646">
     <link rel="icon" href="{{ '/favicon.ico' | relative_url }}" type="image/x-icon" sizes="any">
     <link rel="icon" href="{{ '/assets/Ayin-favicon-dark.png' | relative_url }}" type="image/png" sizes="32x32" media="(prefers-color-scheme: light)">
     <link rel="icon" href="{{ '/assets/Ayin-favicon.png' | relative_url }}" type="image/png" sizes="32x32" media="(prefers-color-scheme: dark)">
     <title>
-      {% if page.title %}{{ page.title }} · {{ site.title }}{% else %}{{ site.title }}{% endif %}
+      {{ page.title | default: 'Portfolio' | escape }} — Abdulkader
     </title>
-    <meta name="description" content="{{ page.excerpt | strip_html | strip_newlines | truncate: 160 | default: site.description }}">
+    <meta name="description" content="{{ page.description | default: page.excerpt | default: site.description | strip_html | strip_newlines | truncate: 160 | escape }}">
     <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
   </head>
   <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    {% include header.html %}
     <div class="page">
-      {% include header.html %}
-
-      <main class="main" role="main">
+      <main class="main" id="main" tabindex="-1">
         {{ content }}
       </main>
 
       {% include footer.html %}
     </div>
-    <script>
-      (function () {
-        var body = document.body;
-        if (!body) return;
-
-        document.addEventListener("click", function (event) {
-          var link = event.target.closest("a");
-          if (!link) return;
-          if (event.defaultPrevented || event.button !== 0) return;
-          if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-
-          var href = link.getAttribute("href");
-          if (!href || href.indexOf("#") === 0) return;
-          if (link.target && link.target !== "_self") return;
-          if (/^https?:\/\//i.test(href) && link.origin !== window.location.origin) return;
-
-          body.classList.add("is-transitioning");
-          event.preventDefault();
-          window.setTimeout(function () {
-            window.location.href = href;
-          }, 180);
-        });
-      })();
-    </script>
   </body>
 </html>

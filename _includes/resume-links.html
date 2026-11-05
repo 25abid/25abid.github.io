@@ -1,0 +1,6 @@
+{% assign resume = site.data.resume %}
+{% assign resume_path = '/abdulkader-alturkmani-resume.pdf' | relative_url %}
+<div class="resume-links">
+  <div><a href="{{ resume_path }}{% if resume.version %}?v={{ resume.version }}{% endif %}">View résumé &nearr;</a><a href="{{ resume_path }}{% if resume.version %}?v={{ resume.version }}{% endif %}" download="Abdulkader-Alturkmani-Resume.pdf">Download résumé &darr;</a></div>
+  <p class="resume-freshness">{% if resume.updated %}Résumé last updated: <time datetime="{{ resume.updated }}">{{ resume.updated | date: '%B %-d, %Y' }}</time>{% else %}Résumé update awaiting commit.{% endif %}</p>
+</div>

@@ -1,0 +1,16 @@
+---
+layout: default
+---
+<article class="essay" itemscope itemtype="https://schema.org/BlogPosting">
+  <header class="essay-header">
+    <p class="eyebrow"><a href="{{ '/blog/' | relative_url }}">The notebook</a> / Article</p>
+    <h1 itemprop="headline">{{ page.title | escape }}</h1>
+    <div class="essay-byline">
+      <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="name">{{ page.author | default: site.data.profile.name | escape }}</span></span>
+      <span>Published <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date: '%B %-d, %Y' }}</time></span>
+      {% if page.updated %}<span>Updated <time datetime="{{ page.updated | date_to_xmlschema }}" itemprop="dateModified">{{ page.updated | date: '%B %-d, %Y' }}</time></span>{% endif %}
+    </div>
+  </header>
+  <div class="essay-content" itemprop="articleBody">{{ content }}</div>
+  <footer class="essay-footer"><a href="{{ '/blog/' | relative_url }}">&larr; All writing</a></footer>
+</article>

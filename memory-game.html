@@ -1,0 +1,30 @@
+---
+layout: default
+title: Memory Card Game
+permalink: /work/memory-game/
+description: Play Abdulkader’s CS50P letter-matching memory game, adapted from the original Python terminal project.
+---
+<section class="hero game-intro">
+  <p class="eyebrow"><a href="{{ '/work/' | relative_url }}">Work</a> / CS50P final project</p>
+  <h1 class="hero-title">A game of <span><em>remembering.</em></span></h1>
+  <p>Reveal two letters. Find a match and they stay uncovered. Miss, and you have two seconds to remember their positions. Find every pair to win.</p>
+</section>
+<section class="game-shell" aria-label="Memory card game">
+  <noscript><p>Enable JavaScript to play, or download the original Python game below.</p></noscript>
+  <form id="game-settings" class="game-controls">
+    <label for="difficulty">Difficulty<select id="difficulty"><option value="4,3">Easy · 4 × 3</option><option value="5,4">Medium · 5 × 4</option><option value="6,6">Hard · 6 × 6</option><option value="custom">Custom grid</option></select></label>
+    <div id="custom-size" class="custom-size" hidden>
+      <label for="rows">Rows<input id="rows" type="number" min="1" max="10" step="1" value="4"></label>
+      <label for="cols">Columns<input id="cols" type="number" min="1" max="10" step="1" value="4"></label>
+    </div>
+    <button type="submit" class="primary-button">New game &rarr;</button>
+  </form>
+  <p id="game-error" class="game-error" role="alert"></p>
+  <div class="game-summary"><p id="game-status" role="status" aria-live="polite" aria-atomic="true">Choose two cards to begin.</p><span id="game-score">0 / 6 pairs · 0 turns</span></div>
+  <div class="board-scroll"><div id="memory-board" class="memory-board" role="group" aria-label="Memory cards"></div></div>
+</section>
+<section class="game-notes" aria-label="About this project">
+  <p>Originally written in Python for Harvard’s CS50P. This browser adaptation uses JavaScript and keeps the original letter matching, difficulty settings, and two-second reveal. Letters can appear in more than one pair. Custom grids support 1–10 rows and columns, with an even number of cells.</p>
+  <p><a href="{{ '/assets/projects/memory-game/project.py' | relative_url }}">Python source</a><a href="{{ '/assets/projects/memory-game/test_project.py' | relative_url }}">Original tests</a><a href="{{ '/assets/projects/memory-game/README.md' | relative_url }}">Project README</a><a href="https://youtu.be/VQEPIS-qccU">Original video demo</a><a href="https://docs.google.com/presentation/d/1UNrSZDNwUvozsvwDr-BpHbVXrVTuBzv9W2sCjdZu_X8/edit?usp=sharing">Project slides</a></p>
+</section>
+<script src="{{ '/assets/js/memory-game.js' | relative_url }}" defer></script>

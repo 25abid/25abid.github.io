@@ -5,7 +5,8 @@
       <a href="mailto:{{ site.email | default: 'hello@example.com' }}">Email</a>
       <a href="https://github.com/25abid" target="_blank" rel="noopener">GitHub</a>
       <a href="https://www.linkedin.com/in/abdulkader-alturkmani-0258b121b/" target="_blank" rel="noopener">LinkedIn</a>
-      <a href="{{ '/abdulkader-alturkmani-resume.pdf' | relative_url }}">Resume</a>
+      <a href="{{ '/abdulkader-alturkmani-resume.pdf' | relative_url }}{% if site.data.resume.version %}?v={{ site.data.resume.version }}{% endif %}">View résumé</a>
     </div>
   </div>
+  <p class="resume-freshness">{% if site.data.resume.updated %}Résumé last updated: <time datetime="{{ site.data.resume.updated }}">{{ site.data.resume.updated | date: '%B %-d, %Y' }}</time>{% else %}Résumé update awaiting commit.{% endif %}</p>
 </footer>

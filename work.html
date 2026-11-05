@@ -2,37 +2,23 @@
 layout: default
 title: Work
 permalink: /work/
+description: Projects in geospatial analysis, Python, Java, and interactive applications by Abdulkader Alturkmani.
 ---
-
 <section class="hero">
-  <h1 class="hero-title">Projects & <span>aspirations</span></h1>
-  <p>
-    What I’ve built so far and what I’m working toward. 
-  </p>
+  <p class="eyebrow">Selected work / {{ site.data.profile.projects | size }} projects</p>
+  <h1 class="hero-title">Ideas, made <span><em>tangible.</em></span></h1>
+  <p>Maps, visual tools, and small games. A selection of academic and personal projects.</p>
 </section>
-
-<section class="section">
-  <h2>Projects</h2>
-  <div class="card-grid">
-    <article class="card">
-      <h3>CS50P Memory Game (Final Project)</h3>
-      <p>Built a terminal‑based memory card game in Python with difficulty levels, custom grid sizes, and input validation. Presented the full build in a slide deck for CS50P.</p>
-      <p><a href="https://docs.google.com/presentation/d/1UNrSZDNwUvozsvwDr-BpHbVXrVTuBzv9W2sCjdZu_X8/edit?usp=sharing" target="_blank" rel="noopener">View slides</a></p>
-    </article>
-    <article class="card">
-      <h3>Project Two</h3>
-      <p>Description 2.</p>
-    </article>
-    <article class="card">
-      <h3>Project Three</h3>
-      <p>Description 3.</p>
-    </article>
-  </div>
-</section>
-
-<section class="section">
-  <h2>Future & aspirations</h2>
-  <p style="color: var(--muted); max-width: 60ch;">
-    Just doing my best.
-  </p>
+<section class="project-list" aria-label="Selected projects">
+  {% for project in site.data.profile.projects %}
+  <article id="{{ project.id }}" class="project-row {% if project.playable %}project-row--play{% endif %}">
+    <span class="project-number">{{ forloop.index | prepend: '0' }}</span>
+    <div><p class="project-category">{{ project.category }}</p><h2>{{ project.title }}</h2><p class="project-tech">{{ project.technologies }}</p></div>
+    <div class="project-copy">
+      <p>{{ project.description }}</p>
+      {% if project.detail %}<p>{{ project.detail }}</p>{% endif %}
+      {% if project.playable %}<a href="{{ '/work/memory-game/' | relative_url }}">Play in your browser &rarr;</a><br><a href="{{ '/assets/projects/memory-game/project.py' | relative_url }}">Original Python source</a>{% endif %}
+    </div>
+  </article>
+  {% endfor %}
 </section>

@@ -1,0 +1,111 @@
+{
+  "name": "Abdulkader Alturkmani",
+  "intro": "I’m Abdulkader, a University of Toronto student interested in how software and data help us understand the world around us.",
+  "about_intro": "I study Geospatial Data Science at the University of Toronto, with minors in Applied Statistics and Computer Science. I like work that connects data to something tangible: a landscape, a visual interface, or a small game you can actually play.",
+  "education": {
+    "institution": "University of Toronto",
+    "degree": "Bachelor of Science",
+    "major": "Geospatial Data Science",
+    "minors": [
+      "Applied Statistics",
+      "Computer Science"
+    ],
+    "period": "September 2023 – November 2027",
+    "coursework": [
+      "Spatial Data Science",
+      "Introduction to Computer Science",
+      "Probability and Statistics",
+      "Linear Algebra",
+      "Introduction to Geospatial Data Science",
+      "Mathematical Proofs"
+    ]
+  },
+  "experience": [
+    {
+      "title": "Frontend Web Design Intern",
+      "organization": "Pepperdean",
+      "period": "March – May 2026",
+      "tools": "WordPress / Elementor / Figma",
+      "description": "I worked on a header redesign and layout restructuring, using engagement research to guide the design. Keyword and competitor analysis informed SEO and AEO recommendations, and I collaborated asynchronously through feedback and design revisions."
+    }
+  ],
+  "certifications": [
+    {
+      "name": "IBM Data Analyst Professional Certificate",
+      "issuer": "IBM · Coursera",
+      "status": "In progress"
+    },
+    {
+      "name": "CS50P — Introduction to Programming with Python",
+      "issuer": "Harvard University · edX",
+      "status": "April 2024"
+    },
+    {
+      "name": "Schulich Business Excellence Academy",
+      "issuer": "Schulich School of Business",
+      "status": "July 2022"
+    }
+  ],
+  "skills": [
+    {
+      "area": "Geospatial",
+      "detail": "ArcGIS Pro, ModelBuilder, viewsheds, least-cost paths, and terrain analysis."
+    },
+    {
+      "area": "Programming",
+      "detail": "Python, Java, SQL, JavaScript, HTML, and CSS; tree structures and recursion."
+    },
+    {
+      "area": "Data analysis",
+      "detail": "pandas, NumPy, descriptive statistics, regression, and Excel."
+    },
+    {
+      "area": "Visual & interface work",
+      "detail": "Matplotlib, Seaborn, JavaFX, WordPress, Elementor, and Figma."
+    }
+  ],
+  "projects": [
+    {
+      "id": "viewshed",
+      "title": "Viewshed & Hiking Route Analysis",
+      "technologies": "ArcGIS Pro / ModelBuilder",
+      "category": "Academic project",
+      "description": "Which viewpoint offers the widest view, and how do you route a hike around a trail closure? I compared three viewpoints in Pipestone Valley with geodesic viewsheds; the selected site covered 153.14 km² of visible terrain.",
+      "detail": "A ModelBuilder workflow weighted slope and landcover costs equally to generate a least-cost route. Tobler’s Hiking Function estimated walking speeds, with maps comparing visibility, terrain costs, and the proposed route."
+    },
+    {
+      "id": "treemap",
+      "title": "Treemap Filesystem Visualizer",
+      "technologies": "Python / Data structures",
+      "category": "Academic project",
+      "description": "A filesystem explored through rectangles. Nested directories are represented as a tree, preserving parent–child relationships and file sizes.",
+      "detail": "Recursive rectangle subdivision allocates screen space by subtree size, making large files and folders easy to compare."
+    },
+    {
+      "id": "paint",
+      "title": "Java Paint with AI Integration",
+      "technologies": "Java / JavaFX / Ollama API",
+      "category": "Academic project",
+      "description": "A drawing application for creating and editing geometric shapes, with custom colours and stroke widths.",
+      "detail": "Undo, redo, and clipboard operations let users revise drawings and reuse shapes. The Ollama API supports prompt-based image generation and editing within the interface."
+    },
+    {
+      "id": "othello",
+      "title": "Othello Game AI",
+      "technologies": "Java / Object-oriented design",
+      "category": "Game project",
+      "description": "An 8×8 Othello engine with turn management, move validation, token counting, and winner detection.",
+      "detail": "A greedy controller evaluates directional flips to choose moves, alongside human and random AI controllers for different matchups."
+    },
+    {
+      "id": "memory",
+      "title": "CS50 Memory Card Game",
+      "technologies": "Python / Browser adaptation in JavaScript",
+      "category": "CS50P final project",
+      "description": "A memory game built around shuffled pairs of letters. Choose a difficulty or a custom grid, uncover two cells at a time, and find every match.",
+      "detail": "Originally built as a Python terminal program for CS50P. The browser adaptation preserves the letter matching, difficulty settings, and two-second mismatch reveal.",
+      "playable": true
+    }
+  ],
+  "resume_sha256": "ff35b0772d59e643f66891605096098e2eebf34a183595be3c0004f8a6810715"
+}

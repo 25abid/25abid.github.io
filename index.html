@@ -1,78 +1,33 @@
 ---
 layout: default
 title: Home
+description: Abdulkader Alturkmani’s portfolio. A University of Toronto student exploring software, data, and interactive systems.
 ---
-
 <div class="home">
   <section class="home-hero">
-    <div class="home-hero-text">
-      <h1 class="home-hero-title">
-        Bringing back <span class="home-title-accent">simplicity.</span>
-      </h1>
-      <p class="home-hero-sub">
-        I’m Abdulkader, a University of Toronto student exploring software, data, and the systems behind everyday things.
-      </p>
-    </div>
-
+    <p class="eyebrow">Abdulkader Alturkmani / Portfolio</p>
+    <h1 class="home-hero-title">A little curiosity.<br>A lot to <em>build.</em></h1>
+    <p class="home-hero-sub">{{ site.data.profile.intro }}</p>
+    <a class="text-link" href="{{ '/work/' | relative_url }}">Explore my work &rarr;</a>
   </section>
-
-  <section class="home-columns">
+  <section class="home-columns" aria-label="Work and writing">
     <div class="home-column">
-      <h2 class="home-label">Latest writing</h2>
+      <h2 class="home-label">Featured project / Play</h2>
+      <div class="home-item">
+        <a href="{{ '/work/memory-game/' | relative_url }}">A game of remembering.</a>
+        <span class="home-meta">CS50P Memory Card Game · Python / Browser adaptation</span>
+        <p class="home-desc">My Python final project, brought to the browser. Pick two letters, find their matches, and see how much you remember.</p>
+      </div>
+      <p class="home-link"><a href="{{ '/work/memory-game/' | relative_url }}">Play the game &rarr;</a></p>
+    </div>
+    <div class="home-column">
+      <h2 class="home-label">From the notebook</h2>
       <ul class="home-list">
         {% for post in site.posts limit:2 %}
-          <li class="home-item">
-            <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-            <span class="home-meta">{{ post.date | date: "%b %Y" }}</span>
-            <p class="home-desc">{{ post.excerpt | strip_html | truncate: 110 }}</p>
-          </li>
+        <li class="home-item"><a href="{{ post.url | relative_url }}">{{ post.title }}</a><span class="home-meta">{{ post.date | date: '%B %Y' }}</span><p class="home-desc">{{ post.excerpt | strip_html | truncate: 110 }}</p></li>
         {% endfor %}
       </ul>
-      <p class="home-link"><a href="{{ '/blog' | relative_url }}">View all posts</a></p>
-    </div>
-
-    <div class="home-column">
-      <h2 class="home-label">Latest project</h2>
-      {% assign proj = site.data.projects.featured %}
-      <div class="home-item home-item--project">
-        <a href="{{ proj.url | relative_url }}">{{ proj.title }}</a>
-        <span class="home-meta">{{ proj.year }}</span>
-        <p class="home-desc">{{ proj.description }}</p>
-      </div>
-      <p class="home-link"><a href="{{ '/work' | relative_url }}">View all projects</a></p>
-    </div>
-
-    <div class="home-column">
-      <h2 class="home-label">GitHub</h2>
-      <div id="github-stats" class="home-api">
-        <span class="home-api-loading">Loading…</span>
-      </div>
-      <p class="home-desc home-desc--small">
-        Pulled live from GitHub’s API. Just enough data to show what I’ve been shipping.
-      </p>
+      <p class="home-link"><a href="{{ '/blog/' | relative_url }}">All writing &rarr;</a></p>
     </div>
   </section>
 </div>
-
-<script>
-(function() {
-  var el = document.getElementById('github-stats');
-  if (!el) return;
-  fetch('https://api.github.com/users/{{ site.github_username }}')
-    .then(function(r) { return r.json(); })
-    .then(function(d) {
-      if (d.message) { el.textContent = '—'; return; }
-      el.innerHTML =
-        '<a href=\"' +
-        d.html_url +
-        '\" target=\"_blank\" rel=\"noopener\">' +
-        d.public_repos +
-        ' repos</a> · ' +
-        d.followers +
-        ' followers';
-    })
-    .catch(function() {
-      el.textContent = '—';
-    });
-})();
-</script>
