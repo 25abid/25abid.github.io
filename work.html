@@ -4,16 +4,12 @@ title: Work
 permalink: /work/
 description: Projects in geospatial analysis, Python, Java, and interactive applications by Abdulkader Alturkmani.
 ---
-<section class="hero">
-  <p class="eyebrow">Selected work / {{ site.data.profile.projects | size }} projects</p>
-  <h1 class="hero-title">Ideas, made <span><em>tangible.</em></span></h1>
-  <p>Maps, visual tools, and small games. A selection of academic and personal projects.</p>
-</section>
+<h1>Work</h1>
 <section class="project-list" aria-label="Selected projects">
   {% for project in site.data.profile.projects %}
   <article id="{{ project.id }}" class="project-row {% if project.playable %}project-row--play{% endif %}">
-    <span class="project-number">{{ forloop.index | prepend: '0' }}</span>
-    <div><p class="project-category">{{ project.category }}</p><h2>{{ project.title }}</h2><p class="project-tech">{{ project.technologies }}</p></div>
+    <h2>{{ project.title }}</h2>
+    <p class="project-tech">{{ project.category }} · {{ project.technologies }}</p>
     <div class="project-copy">
       <p>{{ project.description }}</p>
       {% if project.detail %}<p>{{ project.detail }}</p>{% endif %}

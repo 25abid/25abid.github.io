@@ -4,16 +4,13 @@ title: Blog
 permalink: /blog/
 description: Essays, notes, and updates from Abdulkader Alturkmani.
 ---
-<section class="hero">
-  <p class="eyebrow">The notebook</p>
-  <h1 class="hero-title">Notes along <span><em>the way.</em></span></h1>
-  <p>A place for things I’m learning, building, and thinking through.</p>
-</section>
+<h1>Blog</h1>
 <section class="essay-index" aria-label="Articles">
   {% for post in site.posts %}
   <article class="essay-index-entry">
+    <h2><a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a></h2>
     <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: '%B %-d, %Y' }}</time>
-    <div><h2><a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a></h2><p>{{ post.excerpt | strip_html | truncate: 180 }}</p></div>
+    <p>{{ post.excerpt | strip_html | truncate: 180 }}</p>
   </article>
   {% endfor %}
 </section>

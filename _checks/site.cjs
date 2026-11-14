@@ -15,7 +15,7 @@ function walk(dir) {
       const html = fs.readFileSync(filename, 'utf8');
       assert.ok(!html.includes('{%'), 'Unresolved Liquid in ' + filename);
       assert.match(html, /<title>\s*[^<]+ — Abdulkader\s*<\/title>/, 'Consistent title in ' + filename);
-      assert.ok(html.includes('>ABDULKADER ALTURKMANI</a>'), 'Shared uppercase identity in ' + filename);
+      assert.ok(html.includes('>' + profile.name + '</a>'), 'Shared title-case name in ' + filename);
       assert.ok(!html.includes('/assets/js/grain.js'), 'No procedural texture script');
       const nav = html.match(/<nav class="nav"[^>]*>([\s\S]*?)<\/nav>/)[1];
       const relative = path.relative(root, filename).replaceAll('\\', '/');

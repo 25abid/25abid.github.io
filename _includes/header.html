@@ -1,5 +1,5 @@
 <header class="site-header">
-  <a class="site-name" href="{{ '/' | relative_url }}">ABDULKADER ALTURKMANI</a>
+  <a class="site-name" href="{{ '/' | relative_url }}">{{ site.data.profile.name | escape }}</a>
   <nav class="nav" aria-label="Primary">
     <a href="{{ '/' | relative_url }}" {% if page.url == '/' %}aria-current="page"{% endif %}>Home</a>
     <a href="{{ '/work/' | relative_url }}" {% if page.url contains '/work' %}aria-current="page"{% endif %}>Work</a>

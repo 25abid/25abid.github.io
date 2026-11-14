@@ -5,9 +5,8 @@ permalink: /about/
 description: About Abdulkader Alturkmani, a University of Toronto student working across geospatial data science, software, and design.
 ---
 <div class="about-page">
-  <section class="hero about-hero">
-    <p class="eyebrow">A little about me</p>
-    <h1 class="hero-title">Data, places,<br>and <span><em>possibilities.</em></span></h1>
+  <section>
+    <h1>About me</h1>
     <p>{{ site.data.profile.about_intro }}</p>
     {% include resume-links.html %}
   </section>
