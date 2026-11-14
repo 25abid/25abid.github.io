@@ -122,7 +122,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible
   align-items:center;
   min-width:0;
   text-decoration:none;
-  font:bold clamp(15px,4.5vw,20px)/1 var(--header-serif);
+  font:normal clamp(15px,4.5vw,20px)/1 var(--header-serif);
   padding:8px 0;
   color:var(--text);
   border-radius:0;
