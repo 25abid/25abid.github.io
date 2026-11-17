@@ -6,7 +6,7 @@ description: About Abdulkader Alturkmani, a University of Toronto student workin
 ---
 <div class="about-page">
   <section>
-    <h1>About me</h1>
+    <h1 class="visually-hidden">About me</h1>
     <p>{{ site.data.profile.about_intro }}</p>
     {% include resume-links.html %}
   </section>

@@ -22,11 +22,16 @@
 html
 {
   scrollbar-gutter:stable both-edges;
-  scroll-padding-top:calc(var(--header-space) + 16px)
+  scroll-padding-top:calc(var(--header-space) + 16px);
+  scroll-padding-bottom:130px
 }
 body
 {
   margin:0;
+  min-height:100vh;
+  min-height:100dvh;
+  display:flex;
+  flex-direction:column;
   background:var(--bg) url('../texture.svg') repeat scroll;
   color:var(--text);
   font:16px/1.7 var(--sans)
@@ -69,17 +74,29 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible
 }
 .page
 {
+  flex:1;
+  width:100%;
   max-width:1240px;
-  margin:auto;
+  margin-inline:auto;
   padding:0 var(--page-inset);
-  min-height:calc(100vh - var(--header-space));
   display:flex;
   flex-direction:column;
   position:relative;
   z-index:1
 }
+.page-content
+{
+  display:flex;
+  flex:1;
+  flex-direction:column;
+  min-width:0;
+  position:relative;
+  z-index:1;
+  isolation:isolate
+}
 .site-header
 {
+  flex-shrink:0;
   position:sticky;
   top:0;
   z-index:10;
@@ -151,7 +168,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible
 .main
 {
   flex:1;
-  padding:30px 0 44px;
+  padding:6px 0 44px;
   min-width:0;
   font:18px/1.55 var(--header-serif);
   overflow-wrap:anywhere
@@ -169,11 +186,6 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible
     display:block;
     position:absolute;
     inset:calc(-1 * var(--header-space)) var(--page-inset) 0 42%
-  }
-  .main,.site-footer
-  {
-    position:relative;
-    z-index:1
   }
   .text-wall canvas
   {
@@ -205,11 +217,15 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible
 }
 @media (max-width:760px) and (prefers-reduced-motion:no-preference)
 {
-  .text-wall:not(.text-wall--left):not([hidden]) { display:none; }
   .text-wall--left:not([hidden])
   {
+    width:48px;
+    --text-wall-side-fade:linear-gradient(to right,transparent,#000 34%,transparent)
+  }
+  .text-wall:not(.text-wall--left):not([hidden])
+  {
     inset-inline:auto 0;
-    width:54px;
+    width:48px;
     --text-wall-side-fade:linear-gradient(to right,transparent,#000 66%,transparent)
   }
 }
@@ -221,6 +237,16 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible
   line-height:1.3
 }
 .main h1 { font-size:26px; }
+.home h1 { font-size:clamp(30px,4vw,44px); }
+.visually-hidden
+{
+  position:absolute;
+  width:1px;
+  height:1px;
+  overflow:hidden;
+  clip-path:inset(50%);
+  white-space:nowrap
+}
 .main h2 { font-size:23px; }
 .main h3,.main h4,.main h5,.main h6 { font-size:21px; }
 .main p { margin:0; }
@@ -229,7 +255,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible
 .home ul,.about-list { margin:0 0 6px; }
 .home section + section,
 .profile-section,
-.project-row,
+.project-row + .project-row,
 .essay-index-entry + .essay-index-entry
 {
   margin-top:24px
@@ -243,13 +269,16 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible
 .game-intro { margin-bottom:24px; }
 .site-footer
 {
-  position:relative;
-  isolation:isolate;
+  position:sticky;
+  bottom:0;
+  z-index:2;
+  mix-blend-mode:difference;
   container-type:inline-size;
   padding:36px 0 48px;
   text-align:center;
   color:var(--muted);
-  font:16px/1.15 var(--header-serif)
+  font:16px/1.15 var(--header-serif);
+  pointer-events:none
 }
 .footer-date
 {
@@ -275,6 +304,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible
 }
 .footer-links a
 {
+  pointer-events:auto;
   text-decoration:none;
   text-transform:uppercase;
   transform:scale(1.12,1.65)
@@ -478,6 +508,7 @@ button:hover
     gap:14px
   }
   .footer-links a { transform:scale(1.05,1.65); }
+  .site-footer { padding-block:18px 24px; }
 }
 @media(prefers-reduced-motion:no-preference)
 {

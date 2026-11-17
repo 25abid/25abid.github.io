@@ -24,9 +24,12 @@
     <a class="skip-link" href="#main">Skip to content</a>
     {% include header.html %}
     <div class="page">
-      <main class="main" id="main" tabindex="-1">
-        {{ content }}
-      </main>
+      <div class="page-content">
+        <main class="main" id="main" tabindex="-1">
+          {{ content }}
+        </main>
+        {% include footer.html %}
+      </div>
 
       <div class="text-wall text-wall--left" hidden>
         <canvas aria-hidden="true"></canvas>
@@ -34,8 +37,8 @@
       <div class="text-wall" hidden>
         <canvas aria-hidden="true"></canvas>
       </div>
-      {% include footer.html %}
     </div>
     <script src="{{ '/assets/js/text-wall.js' | relative_url }}" defer></script>
+    <script src="{{ '/assets/js/page-navigation.js' | relative_url }}" defer></script>
   </body>
 </html>

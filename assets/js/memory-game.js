@@ -2,6 +2,8 @@
 (() => {
   'use strict';
   const form = document.querySelector('#game-settings');
+  if (!form || form.dataset.initialized) return;
+  form.dataset.initialized = 'true';
   const difficulty = document.querySelector('#difficulty');
   const custom = document.querySelector('#custom-size');
   const board = document.querySelector('#memory-board');

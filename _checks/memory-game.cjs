@@ -5,7 +5,7 @@ const fs = require('node:fs');
 const vm = require('node:vm');
 class Element {
   constructor() {
-    this.children = []; this.events = {}; this.attributes = {}; this.style = {};
+    this.children = []; this.events = {}; this.attributes = {}; this.style = {}; this.dataset = {};
     this.classes = new Set(); this.value = ''; this.textContent = '';
     this.classList = { toggle: (name, on) => on ? this.classes.add(name) : this.classes.delete(name) };
   }
