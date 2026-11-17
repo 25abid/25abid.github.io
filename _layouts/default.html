@@ -28,7 +28,14 @@
         {{ content }}
       </main>
 
+      <div class="text-wall text-wall--left" hidden>
+        <canvas aria-hidden="true"></canvas>
+      </div>
+      <div class="text-wall" hidden>
+        <canvas aria-hidden="true"></canvas>
+      </div>
       {% include footer.html %}
     </div>
+    <script src="{{ '/assets/js/text-wall.js' | relative_url }}" defer></script>
   </body>
 </html>
