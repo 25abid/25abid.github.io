@@ -260,10 +260,12 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible
   {
     width:100%;
     padding-block:.66em;
-    font-size:clamp(22px,5.5vw,32px);
-    line-height:1.2
+    font-size:min(32px,4.5cqw);
+    line-height:1.2;
+    text-align:center;
+    white-space:nowrap
   }
-  .home-title-lettering { transform:scaleY(1.6); }
+  .home-title-lettering { transform:scaleY(2.15); }
 }
 .visually-hidden
 {
@@ -323,11 +325,11 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible
 .footer-links
 {
   display:flex;
-  flex-wrap:wrap;
   justify-content:space-between;
   align-items:center;
-  gap:10px;
-  font-size:clamp(14px,3.25cqw,38px)
+  gap:min(10px,1.65cqw);
+  font-size:min(38px,3.25cqw);
+  white-space:nowrap
 }
 .footer-links a
 {
@@ -532,7 +534,7 @@ button:hover
   .footer-links
   {
     justify-content:center;
-    gap:14px
+    font-size:4cqw
   }
   .footer-links a { transform:scale(1.05,1.65); }
   .site-footer { padding-block:18px 24px; }
