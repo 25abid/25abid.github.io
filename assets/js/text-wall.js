@@ -23,7 +23,10 @@ document.querySelectorAll('.text-wall').forEach(wall => {
   let previousTime = 0;
   let revisionTime = 0;
   let titleOffset = 0;
-  let cycleHeight = 0;
+  let titleMasks = [];
+  let titleSpacing = 0;
+  let maskRows = 0;
+  let columns = 0;
   let pointer = null;
   let touchRippleUntil = 0;
   let visible = false;
@@ -137,24 +140,26 @@ document.querySelectorAll('.text-wall').forEach(wall => {
     context.restore();
   }
 
-  function randomGlyph(inTitle) {
-    const glyphs = inTitle ? titleGlyphs : backgroundGlyphs;
+  function randomGlyph(useLetters) {
+    const glyphs = useLetters ? titleGlyphs : backgroundGlyphs;
     return glyphs[Math.floor(Math.random() * glyphs.length)];
   }
 
   function updateGlyph(cell) {
     const accentedField = isLeft || compact.matches;
     const accent = accentedField && Math.random() < 0.025;
-    cell.letter = randomGlyph(cell.inTitle || accent);
+    cell.letter = randomGlyph(accent || (!accentedField && Math.random() < 0.65));
     cell.color = accent
       ? accentColors[Math.floor(Math.random() * accentColors.length)]
-      : cell.inTitle ? '#d7e7da' : '#cfcbc3';
-    cell.alpha = accent || cell.inTitle ? 0.95 : accentedField ? 0.12 + Math.random() * 0.26 : 0.23;
+      : '#cfcbc3';
+    cell.alpha = accent ? 0.95 : accentedField ? 0.12 + Math.random() * 0.26 : 0.23;
   }
 
   function buildGrid(previousWidth, previousHeight) {
     const previousCells = cells;
     const previousColumns = Math.max(0, Math.ceil((previousWidth - Math.floor(cellWidth / 2)) / cellWidth));
+    columns = Math.ceil((width - Math.floor(cellWidth / 2)) / cellWidth);
+    titleMasks = [];
     cells = [];
     for (let y = Math.floor(rowHeight / 2); y < height; y += rowHeight) {
       for (let x = Math.floor(cellWidth / 2); x < width; x += cellWidth) {
@@ -164,7 +169,7 @@ document.querySelectorAll('.text-wall').forEach(wall => {
           cells.push(previous);
           continue;
         }
-        const cell = { x, y, inTitle: false, pushX: 0, pushY: 0 };
+        const cell = { x, y, pushX: 0, pushY: 0 };
         updateGlyph(cell);
         cells.push(cell);
       }
@@ -178,11 +183,11 @@ document.querySelectorAll('.text-wall').forEach(wall => {
     mask.height = titleLength;
     const ink = mask.getContext('2d');
     const contentEdge = content.getBoundingClientRect().right - canvas.getBoundingClientRect().left;
-    const spacing = Math.max(titleLength + 80, height / titles.length);
-    cycleHeight = spacing * titles.length;
-    titleOffset %= cycleHeight;
+    maskRows = Math.ceil(titleLength / rowHeight);
+    titleSpacing = Math.ceil(Math.max(titleLength + 80, height / titles.length) / rowHeight);
+    titleOffset %= titleSpacing * titles.length;
 
-    titles.forEach((title, index) => {
+    titleMasks = titles.map(title => {
       ink.clearRect(0, 0, width, titleLength);
       ink.save();
       ink.font = '900 100px Arial, sans-serif';
@@ -196,15 +201,14 @@ document.querySelectorAll('.text-wall').forEach(wall => {
       ink.restore();
 
       const pixels = ink.getImageData(0, 0, width, titleLength).data;
+      const highlights = new Uint8Array(columns * maskRows);
       for (let y = Math.floor(rowHeight / 2); y < titleLength; y += rowHeight) {
         for (let x = Math.floor(cellWidth / 2); x < width; x += cellWidth) {
-          if (pixels[(y * width + x) * 4 + 3] > 100) {
-            const cell = { x, y: y + index * spacing + 48, inTitle: true, pushX: 0, pushY: 0 };
-            updateGlyph(cell);
-            cells.push(cell);
-          }
+          highlights[Math.floor(y / rowHeight) * columns + Math.floor(x / cellWidth)] =
+            pixels[(y * width + x) * 4 + 3] > 100;
         }
       }
+      return highlights;
     });
   }
 
@@ -214,10 +218,18 @@ document.querySelectorAll('.text-wall').forEach(wall => {
     const top = bounds.top;
     const firstVisible = -top - radius;
     const lastVisible = innerHeight - top + radius;
+    const cycleRows = titleSpacing * titleMasks.length;
+    const shift = Math.floor(titleOffset) - 5;
     for (const cell of cells) {
-      const { x, inTitle } = cell;
-      const y = inTitle ? (cell.y + cycleHeight - titleOffset) % cycleHeight : cell.y;
+      const { x, y } = cell;
       if (y < firstVisible || y > lastVisible) continue;
+      let highlighted = false;
+      if (cycleRows) {
+        const row = (Math.floor(y / rowHeight) + shift + cycleRows) % cycleRows;
+        const maskRow = row % titleSpacing;
+        highlighted = maskRow < maskRows &&
+          titleMasks[Math.floor(row / titleSpacing)][maskRow * columns + Math.floor(x / cellWidth)];
+      }
       let pushX = 0;
       let pushY = 0;
       if (pointer) {
@@ -234,8 +246,8 @@ document.querySelectorAll('.text-wall').forEach(wall => {
       cell.pushX += (pushX - cell.pushX) * 0.22;
       cell.pushY += (pushY - cell.pushY) * 0.22;
       const displaced = Math.abs(cell.pushX) + Math.abs(cell.pushY) > 4;
-      context.fillStyle = cell.color;
-      context.globalAlpha = displaced ? Math.max(cell.alpha, 0.48) : cell.alpha;
+      context.fillStyle = highlighted ? '#b9dfbf' : cell.color;
+      context.globalAlpha = highlighted ? 0.95 : displaced ? Math.max(cell.alpha, 0.48) : cell.alpha;
       if (eye && Math.abs(x - eye.x) < 50 * eye.scale && Math.abs(y - eye.y) < 22 * eye.scale) {
         const distance = Math.hypot((x - eye.x) / (50 * eye.scale), (y - eye.y) / (22 * eye.scale));
         const blend = Math.min(1, eye.age / 400, (eyeDuration - eye.age) / 800);
@@ -254,7 +266,9 @@ document.querySelectorAll('.text-wall').forEach(wall => {
     const elapsed = previousTime ? Math.min(time - previousTime, 50) : 0;
     previousTime = time;
     advanceEye(elapsed);
-    if (!isLeft && !compact.matches) titleOffset = (titleOffset + elapsed * 0.012) % cycleHeight;
+    if (titleMasks.length) {
+      titleOffset = (titleOffset + elapsed * 0.012 / rowHeight) % (titleSpacing * titleMasks.length);
+    }
     revisionTime += elapsed;
     if (revisionTime >= 90) {
       revisionTime = 0;
@@ -324,4 +338,5 @@ document.querySelectorAll('.text-wall').forEach(wall => {
   });
   document.addEventListener('visibilitychange', updateAnimation);
   wall.hidden = false;
+  resize();
 });

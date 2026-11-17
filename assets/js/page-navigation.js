@@ -3,6 +3,7 @@
   const primaryLinks = [...document.querySelectorAll('.site-header nav a')];
   let current = new URL(location.href);
   let pending;
+  let pendingUrl;
   const scrollPositions = new Map();
 
   const pageKey = url => url.pathname + url.search;
@@ -25,6 +26,7 @@
     scrollPositions.set(current.href, window.scrollY);
     const request = new AbortController();
     pending = request;
+    pendingUrl = url.href;
 
     try {
       const response = await fetch(url, { signal: request.signal });
@@ -60,7 +62,10 @@
         else location.assign(url);
       }
     } finally {
-      if (pending === request) pending = null;
+      if (pending === request) {
+        pending = null;
+        pendingUrl = null;
+      }
     }
   }
 
@@ -70,8 +75,16 @@
     const link = event.target.closest('a[href]');
     if (!link || (link.target && link.target !== '_self') || link.hasAttribute('download')) return;
     const url = new URL(link.href, location.href);
-    if (!isPage(url) || pageKey(url) === pageKey(current)) return;
+    if (!isPage(url) || (pageKey(url) === pageKey(current) && url.hash)) return;
     event.preventDefault();
+    if (pendingUrl === url.href && !pending.signal.aborted) return;
+    if (pageKey(url) === pageKey(current) && pageKey(url) === pageKey(new URL(location.href))) {
+      pending?.abort();
+      if (current.href !== url.href) history.pushState(null, '', url);
+      current = url;
+      reveal(url, false);
+      return;
+    }
     navigate(url);
   });
 
