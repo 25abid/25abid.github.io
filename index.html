@@ -10,22 +10,34 @@ description: Abdulkader Alturkmani’s personal website. Projects and writing fr
     </h1>
     <p>
       I’m Abdulkader. I study geospatial data science at the University of Toronto, with minors in
-      applied statistics and computer science. This is my personal site and blog. I write about
-      what I’m learning, the maps and little programs I make, and sometimes whatever game I’m playing.
+      applied statistics and computer science. A lot of my work ends up being something visual:
+      a map, a drawing app, or a game. This site is where I put those projects and write about
+      what I’m learning along the way.
     </p>
   </section>
 
   <section>
-    <h2>Projects</h2>
+    <h2>What I’m looking into</h2>
     <p>
-      I made a memory card game in Python for my CS50P final. I later made a browser version
-      you can <a href="{{ '/work/memory-game/' | relative_url }}">play here</a>.
-      My other projects are on the <a href="{{ '/work/' | relative_url }}">work page</a>.
+      Lately, I’ve been looking into building native Windows apps. I’d like to make something
+      that solves a problem students run into and eventually put it on the Microsoft Store.
+      I’m still figuring out what that first app should be.
     </p>
   </section>
 
   <section>
-    <h2>From the notebook</h2>
+    <h2>Off the clock</h2>
+    <p>
+      I play a lot of video games and sometimes record my gameplay for
+      <a href="https://www.youtube.com/@AboodyJames">my YouTube channel</a>.
+      This is an ongoing side quest that I plan to spend more time on. I enjoy content creation,
+      and it gives me a chance to explore different ideas, challenge my creativity, and develop
+      my editing skills.
+    </p>
+  </section>
+
+  <section>
+    <h2>From my notebook</h2>
     <ul>
       {% for post in site.posts limit:2 %}
         <li><a href="{{ post.url | relative_url }}">{{ post.title }}</a></li>

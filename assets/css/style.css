@@ -282,6 +282,9 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible
 .main p + p { margin-top:.65em; }
 .main ul { padding-left:1.25em; }
 .home ul,.about-list { margin:0 0 6px; }
+.home section > p { text-indent:2em; }
+.home section:has(> h2) > p { margin-inline-start:2em; }
+.home section > ul + p { text-indent:0; }
 .home section + section,
 .profile-section,
 .project-row + .project-row,

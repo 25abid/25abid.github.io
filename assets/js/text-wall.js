@@ -15,7 +15,6 @@ document.querySelectorAll('.text-wall').forEach(wall => {
   const accentColors = ['#66ffd4', '#ff80ce', '#ffd47a', '#91b9ff'];
   const cellWidth = 6;
   const rowHeight = 9;
-  const radius = 42;
   let width = 0;
   let height = 0;
   let cells = [];
@@ -27,8 +26,6 @@ document.querySelectorAll('.text-wall').forEach(wall => {
   let titleSpacing = 0;
   let maskRows = 0;
   let columns = 0;
-  let pointer = null;
-  let touchRippleUntil = 0;
   let visible = false;
   let eye = null;
   let lastEye = null;
@@ -169,7 +166,7 @@ document.querySelectorAll('.text-wall').forEach(wall => {
           cells.push(previous);
           continue;
         }
-        const cell = { x, y, pushX: 0, pushY: 0 };
+        const cell = { x, y };
         updateGlyph(cell);
         cells.push(cell);
       }
@@ -216,8 +213,8 @@ document.querySelectorAll('.text-wall').forEach(wall => {
     context.clearRect(0, 0, width, height);
     const bounds = canvas.getBoundingClientRect();
     const top = bounds.top;
-    const firstVisible = -top - radius;
-    const lastVisible = innerHeight - top + radius;
+    const firstVisible = -top - rowHeight;
+    const lastVisible = innerHeight - top + rowHeight;
     const cycleRows = titleSpacing * titleMasks.length;
     const shift = Math.floor(titleOffset) - 5;
     for (const cell of cells) {
@@ -230,39 +227,19 @@ document.querySelectorAll('.text-wall').forEach(wall => {
         highlighted = maskRow < maskRows &&
           titleMasks[Math.floor(row / titleSpacing)][maskRow * columns + Math.floor(x / cellWidth)];
       }
-      let pushX = 0;
-      let pushY = 0;
-      if (pointer) {
-        const dx = x + bounds.left - pointer.x;
-        const dy = y + top - pointer.y;
-        const distance = Math.hypot(dx, dy);
-        if (distance < radius) {
-          const angle = Math.atan2(dy, dx);
-          const force = (1 - distance / radius) * radius;
-          pushX = Math.cos(angle) * force;
-          pushY = Math.sin(angle) * force;
-        }
-      }
-      cell.pushX += (pushX - cell.pushX) * 0.22;
-      cell.pushY += (pushY - cell.pushY) * 0.22;
-      const displaced = Math.abs(cell.pushX) + Math.abs(cell.pushY) > 4;
       context.fillStyle = highlighted ? '#b9dfbf' : cell.color;
-      context.globalAlpha = highlighted ? 0.95 : displaced ? Math.max(cell.alpha, 0.48) : cell.alpha;
+      context.globalAlpha = highlighted ? 0.95 : cell.alpha;
       if (eye && Math.abs(x - eye.x) < 50 * eye.scale && Math.abs(y - eye.y) < 22 * eye.scale) {
         const distance = Math.hypot((x - eye.x) / (50 * eye.scale), (y - eye.y) / (22 * eye.scale));
         const blend = Math.min(1, eye.age / 400, (eyeDuration - eye.age) / 800);
         context.globalAlpha *= 1 - 0.82 * blend * Math.max(0, 1 - distance ** 4);
       }
-      context.fillText(cell.letter, x + cell.pushX, y + cell.pushY);
+      context.fillText(cell.letter, x, y);
     }
     if (eye) drawEye();
   }
 
   function animate(time) {
-    if (touchRippleUntil && time >= touchRippleUntil) {
-      pointer = null;
-      touchRippleUntil = 0;
-    }
     const elapsed = previousTime ? Math.min(time - previousTime, 50) : 0;
     previousTime = time;
     advanceEye(elapsed);
@@ -311,29 +288,12 @@ document.querySelectorAll('.text-wall').forEach(wall => {
     updateAnimation();
   }
 
-  canvas.addEventListener('pointermove', event => {
-    if (event.pointerType === 'touch') return;
-    touchRippleUntil = 0;
-    pointer = { x: event.clientX, y: event.clientY };
-  });
-  canvas.addEventListener('pointerleave', event => {
-    if (event.pointerType !== 'touch') pointer = null;
-  });
-  document.addEventListener('pointerdown', event => {
-    if (event.pointerType !== 'touch' || !enabled.matches) return;
-    const bounds = canvas.getBoundingClientRect();
-    if (event.clientX < bounds.left || event.clientX >= bounds.right ||
-        event.clientY < bounds.top || event.clientY >= bounds.bottom) return;
-    pointer = { x: event.clientX, y: event.clientY };
-    touchRippleUntil = performance.now() + 230;
-  }, { passive: true });
   new ResizeObserver(resize).observe(canvas);
   new IntersectionObserver(([entry]) => {
     visible = entry.isIntersecting;
     updateAnimation();
   }).observe(canvas);
   enabled.addEventListener('change', () => {
-    pointer = null;
     updateAnimation();
   });
   document.addEventListener('visibilitychange', updateAnimation);
