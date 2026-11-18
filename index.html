@@ -9,10 +9,12 @@ description: Abdulkader Alturkmani’s personal website. Projects and writing fr
       <span class="home-title-lettering">Sometimes, I spend my <span class="home-title-time">time</span> <strong>learning things</strong> <span class="home-title-face">:/</span></span>
     </h1>
     <p>
-      I’m Abdulkader. I study geospatial data science at the University of Toronto, with minors in
-      applied statistics and computer science. A lot of my work ends up being something visual:
-      a map, a drawing app, or a game. This site is where I put those projects and write about
-      what I’m learning along the way.
+      Hello, I hope you’re doing well. My name is Abdulkader Alturkmani
+      (<bdi lang="ar" dir="rtl">عبد القادر التركماني</bdi>).
+      I study geospatial data science at the University of Toronto, with minors in applied
+      statistics and computer science. This is my portfolio, where I share my projects and
+      write about what I’m learning along the way. I have many, many interests, so feel free
+      to look around!
     </p>
   </section>
 
@@ -25,24 +27,13 @@ description: Abdulkader Alturkmani’s personal website. Projects and writing fr
     </p>
   </section>
 
-  <section>
-    <h2>Off the clock</h2>
-    <p>
-      I play a lot of video games and sometimes record my gameplay for
-      <a href="https://www.youtube.com/@AboodyJames">my YouTube channel</a>.
-      This is an ongoing side quest that I plan to spend more time on. I enjoy content creation,
-      and it gives me a chance to explore different ideas, challenge my creativity, and develop
-      my editing skills.
-    </p>
-  </section>
-
-  <section>
+  <section class="home-posts">
     <h2>From my notebook</h2>
-    <ul>
-      {% for post in site.posts limit:2 %}
-        <li><a href="{{ post.url | relative_url }}">{{ post.title }}</a></li>
-      {% endfor %}
-    </ul>
-    <p><a href="{{ '/blog/' | relative_url }}">All posts</a></p>
+    {% for post in site.posts limit:2 %}
+      <article class="essay-index-entry">
+        <h3><a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a></h3>
+      </article>
+    {% endfor %}
+    <a class="home-all-posts" href="{{ '/blog/' | relative_url }}">All posts</a>
   </section>
 </div>
